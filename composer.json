@@ -1,0 +1,26 @@
+{
+    "name": "dvlpr1996/php-scraper",
+    "description": "php wikipedia scraper",
+    "license": "MIT",
+	"type": "project",
+    "keywords": [
+		"php",
+		"MVC",
+		"weblog",
+		"Php mvc web log"
+	],
+    "autoload":{
+        "psr-4": {
+			"app\\": "App/"
+		},
+        "files": [
+			"App/helpers/helper.php"
+		]
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.5"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^6.2"
+    }
+}
