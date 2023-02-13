@@ -16,4 +16,4 @@ try {
 require_once BASE_APP_PATH . 'App/helpers/constants.php';
 require_once BASE_APP_PATH . 'Config/error.php';
 
-$route = new RouterAdapter(config('route'));
+$router = new RouterAdapter;

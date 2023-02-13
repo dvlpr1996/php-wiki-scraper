@@ -1,9 +1,13 @@
 @extends('layouts.master')
 @section('title', 'Home')
 
-<main class="container">
+<main class="px-sm-0 container px-2">
 		<div class="row my-3">
-				<h1 class="display-4 text-center fst-italic">Php wikipedia scraper</h1>
+				<h1 class="display-4 fst-italic text-center">
+						<a href="{{ route('index') }}" class="text-decoration-none text-dark">
+								Php wikipedia scraper
+						</a>
+				</h1>
 		</div>
 
 		<div class="row justify-content-center">

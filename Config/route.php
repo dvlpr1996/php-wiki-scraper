@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'base_folder' => realpath(BASE_APP_PATH . 'public/index.php'),
+    'base_folder' => realpath(APP_BASE_PATH . 'public'),
     'main_method' => 'index',
     'paths' => [
-        'controllers' => realpath(BASE_APP_PATH . 'App/Controllers/')
+        'controllers' => realpath(APP_BASE_PATH . 'App/Controllers')
     ],
     'namespaces' => [
         'controllers' => 'app\Controllers'

@@ -1,8 +1,9 @@
 <?php
 
 use app\Controllers\ActionController;
+use app\Controllers\CrawlerController;
 
-$route->get('/', [ActionController::class, 'index'], 'index');
-$route->get('/home', [ActionController::class, 'home'], 'home');
-$route->post('/crawler', [ActionController::class, 'crawler'], 'crawler');
+$router->get('/', [ActionController::class, 'index'], 'index');
+$router->post('/crawler', [CrawlerController::class, 'crawler'], 'crawler');
 
+$router->runRouter();

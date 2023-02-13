@@ -9,9 +9,9 @@ class RouterAdapter
     private $router;
     private array $config;
 
-    public function __construct(array $config)
+    public function __construct()
     {
-        $this->config = $config;
+        $this->config = config('route');
         $this->router = new Router($this->config);
     }
 
@@ -47,7 +47,6 @@ class RouterAdapter
         return $this->router->notFound(function () {
             header("HTTP/1.0 404 Not Found");
             die('404');
-            // view('404');
         });
     }
 
