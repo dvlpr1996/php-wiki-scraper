@@ -1,8 +1,6 @@
 <?php
 
-use app\Core\Config\Config;
+require_once realpath(__DIR__ . '/../App/Bootstrap/init.php');
+require realpath(__DIR__ . '/../routes/web.php');
 
-require_once __DIR__ . '/../App/Bootstrap/init.php';
-
-
-dd((new Config)->get('app.app_name'));
+$route->runRouter();
