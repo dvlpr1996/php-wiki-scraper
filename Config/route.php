@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'base_folder' => realpath(BASE_APP_PATH . 'public/'),
+    'base_folder' => realpath(BASE_APP_PATH . 'public/index.php'),
     'main_method' => 'index',
     'paths' => [
         'controllers' => realpath(BASE_APP_PATH . 'App/Controllers/')

@@ -19,9 +19,11 @@
     },
     "require": {
         "vlucas/phpdotenv": "^5.5",
-        "izniburak/router": "^2.5"
+        "izniburak/router": "^2.5",
+        "jenssegers/blade": "^1.4"
     },
     "require-dev": {
-        "symfony/var-dumper": "^6.2"
+        "symfony/var-dumper": "^6.2",
+        "phpunit/phpunit": "^10.0"
     }
 }

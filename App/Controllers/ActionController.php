@@ -9,10 +9,16 @@ class ActionController extends Controller
 {
     public function index()
     {
-        include_once APP_BASE_PATH . 'Resources/index.php';
+        return view('index');
     }
 
-    public function crawler(Request $request) {
+    public function crawler(Request $request)
+    {
         dd($request);
+    }
+
+    public function home()
+    {
+        dd('home');
     }
 }
