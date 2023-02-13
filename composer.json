@@ -20,7 +20,8 @@
     "require": {
         "vlucas/phpdotenv": "^5.5",
         "izniburak/router": "^2.5",
-        "jenssegers/blade": "^1.4"
+        "jenssegers/blade": "^1.4",
+        "rakit/validation": "^1.4"
     },
     "require-dev": {
         "symfony/var-dumper": "^6.2",

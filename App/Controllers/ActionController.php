@@ -2,12 +2,12 @@
 
 namespace app\Controllers;
 
-use Buki\Router\Http\Controller;
+use app\Controllers\BaseController;
 
-class ActionController extends Controller
+class ActionController extends BaseController
 {
     public function index()
     {
-        return view('index');
+        return $this->view('index');
     }
 }

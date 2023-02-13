@@ -15,7 +15,7 @@
 						<form action="{{ route('crawler') }}" method="POST">
 								<div class="input-group mb-3">
 										<input type="text" class="form-control" placeholder="Search Wikipedia" name="input">
-										<button type="submit" class="btn btn-success" name="submit-btn">
+										<button type="submit" class="btn btn-success">
 												search
 										</button>
 								</div>
@@ -23,8 +23,18 @@
 				</div>
 		</div>
 
-		<div class="row my-4">
-
+		<div class="row justify-content-center">
+				<div class="col-11 col-lg-8">
+						@if (isset($errors) && !is_null($errors) && !empty($errors))
+								<div class="alert alert-danger">
+										<ul class="m-0 p-0 list-unstyled">
+												@foreach ($errors as $error)
+														<li class="text-danger">{{ $error }}</li>
+												@endforeach
+										</ul>
+								</div>
+						@endif
+				</div>
 		</div>
 
 </main>
