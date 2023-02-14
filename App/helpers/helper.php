@@ -23,7 +23,11 @@ if (!function_exists('checkFileExists')) {
 if (!function_exists('view')) {
     function view(string $path, array $data = []): void
     {
-        (new BladeViewAdapter)->display($path, $data);
+        try {
+            (new BladeViewAdapter)->display($path, $data);
+        } catch (Exception $e) {
+            displayError($e);
+        }
     }
 }
 
@@ -45,5 +49,14 @@ if (!function_exists('getRoute')) {
             }
         }
         return $route;
+    }
+}
+
+if (!function_exists('displayError')) {
+    function displayError($msg)
+    {
+        echo "<pre style='color: #9c4100; background: #eee; z-index: 999; position: relative; padding: 10px; margin: 10px; border-radius: 5px; border-left: 3px solid #c56705;'>";
+        echo $msg;
+        echo "</pre>";
     }
 }

@@ -3,6 +3,7 @@
 namespace app\Core\Adapter;
 
 use Jenssegers\Blade\Blade;
+use app\exceptions\VewDoesNotExistException;
 
 class BladeViewAdapter
 {
@@ -20,8 +21,7 @@ class BladeViewAdapter
     private function renderView(string $viewPath, array $viewData = [])
     {
         if (!checkFileExists($this->generateViewPath($viewPath)))
-            die($viewPath . ' does not exists');
-        // throw new VewDoesNotExistException($viewPath . ' does not exists');
+            throw new VewDoesNotExistException($viewPath . ' view file does not exists');
 
         echo $this->load()->render($viewPath,  $viewData);
     }
