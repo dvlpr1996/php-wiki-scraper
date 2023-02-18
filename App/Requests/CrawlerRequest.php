@@ -9,7 +9,7 @@ class CrawlerRequest implements ValidatorInterface
 	public function validateRules(): array
 	{
 		return [
-			'input' => 'required|alpha_num|min:1|',
+			'input' => 'required|min:1|',
 		];
 	}
 }

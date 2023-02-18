@@ -3,7 +3,7 @@
 
 <main class="px-sm-0 container px-2">
 		<div class="row my-3">
-				<h1 class="display-4 fst-italic text-center">
+				<h1 class="display-3 fst-italic text-center">
 						<a href="{{ route('index') }}" class="text-decoration-none text-dark">
 								Php wikipedia scraper
 						</a>
@@ -27,7 +27,7 @@
 				<div class="col-11 col-lg-8">
 						@if (isset($errors) && !is_null($errors) && !empty($errors))
 								<div class="alert alert-danger">
-										<ul class="m-0 p-0 list-unstyled">
+										<ul class="list-unstyled m-0 p-0">
 												@foreach ($errors as $error)
 														<li class="text-danger">{{ $error }}</li>
 												@endforeach
@@ -37,4 +37,17 @@
 				</div>
 		</div>
 
+		<div class="row mt-5">
+				@if (isset($title))
+						<h1 class="display-5 fst-italic">{{ $title ?? 'somethings wrong' }}</h1>
+				@endif
+		</div>
+
+		<div class="row mt-3">
+				@if (isset($pNodes) && !is_null($pNodes) && !empty($pNodes))
+						@foreach ($pNodes as $key => $value)
+								<p class="lead my-2">{{ $value[$key] }}</p>
+						@endforeach
+				@endif
+		</div>
 </main>
