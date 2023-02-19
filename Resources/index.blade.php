@@ -38,15 +38,15 @@
 		</div>
 
 		<div class="row mt-5">
-				@if (isset($title))
-						<h1 class="display-5 fst-italic">{{ $title ?? 'somethings wrong' }}</h1>
+				@if (isset($title) && !is_null($title) && !empty($title))
+						<h1 class="display-5 fst-italic">{{ $title }}</h1>
 				@endif
 		</div>
 
 		<div class="row mt-3">
 				@if (isset($pNodes) && !is_null($pNodes) && !empty($pNodes))
 						@foreach ($pNodes as $key => $value)
-								<p class="lead my-2">{{ $value[$key] }}</p>
+								<p class="lead my-2 fw-normal">{{ $value[$key] }}</p>
 						@endforeach
 				@endif
 		</div>
