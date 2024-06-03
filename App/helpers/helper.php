@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use app\Core\Config\Config;
 use app\Core\Adapter\BladeViewAdapter;
 
@@ -21,25 +23,25 @@ if (!function_exists('checkFileExists')) {
 }
 
 if (!function_exists('view')) {
-    function view(string $path, array $data = []): void
+    function view(string $path, array $data = [])
     {
         try {
             (new BladeViewAdapter)->display($path, $data);
         } catch (Exception $e) {
-            displayError($e);
+            displayError($e->getMessage());
         }
     }
 }
 
 if (!function_exists('route')) {
-    function route(string $routeName, array $parameter = [])
+    function route(string $routeName, array $parameter = []): string
     {
         return BASE_URL . getRoute($routeName);
     }
 }
 
 if (!function_exists('getRoute')) {
-    function getRoute(string $routeName)
+    function getRoute(string $routeName): string
     {
         global $router;
         $allRoute = $router->getAllRoutes();
@@ -53,10 +55,18 @@ if (!function_exists('getRoute')) {
 }
 
 if (!function_exists('displayError')) {
-    function displayError($msg)
+    function displayError(string $msg): void
     {
         echo "<pre style='color: #9c4100; background: #eee; z-index: 999; position: relative; padding: 10px; margin: 10px; border-radius: 5px; border-left: 3px solid #c56705;'>";
         echo $msg;
         echo "</pre>";
+    }
+}
+
+if (!function_exists('plainText')) {
+    function plainText(string $text): string
+    {
+        $text = preg_replace('/\[\d+\]/', '', $text);
+        return preg_replace('/\[\w+\]/', '', $text);
     }
 }

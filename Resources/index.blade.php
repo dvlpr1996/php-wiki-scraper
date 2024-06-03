@@ -3,9 +3,9 @@
 
 <main class="px-sm-0 container px-2">
 		<div class="row my-3">
-				<h1 class="display-3 fst-italic text-center">
+				<h1 class="display-4 fst-italic text-center">
 						<a href="{{ route('index') }}" class="text-decoration-none text-dark">
-								Php wikipedia scraper
+								Php wikipedia scraper (English Only)
 						</a>
 				</h1>
 		</div>
@@ -25,9 +25,9 @@
 
 		<div class="row justify-content-center">
 				<div class="col-11 col-lg-8">
-						@if (isset($errors) && !is_null($errors) && !empty($errors))
+						@if (isset($errors) && !empty($errors))
 								<div class="alert alert-danger">
-										<ul class="list-unstyled m-0 p-0">
+										<ul class="m-0 pl-2">
 												@foreach ($errors as $error)
 														<li class="text-danger">{{ $error }}</li>
 												@endforeach
@@ -38,16 +38,23 @@
 		</div>
 
 		<div class="row mt-5">
-				@if (isset($title) && !is_null($title) && !empty($title))
-						<h1 class="display-5 fst-italic">{{ $title }}</h1>
+				@if (isset($hTitle) && !empty($hTitle))
+						<h1 class="display-5 fst-italic">{{ plainText($hTitle) }}</h1>
 				@endif
 		</div>
 
 		<div class="row mt-3">
-				@if (isset($pNodes) && !is_null($pNodes) && !empty($pNodes))
+				@if (isset($pNodes) && !empty($pNodes))
 						@foreach ($pNodes as $key => $value)
-								<p class="lead my-2 fw-normal">{{ $value[$key] }}</p>
+								<p class="lead fw-normal my-2">{{ plainText($value[$key]) }}</p>
 						@endforeach
+				@endif
+				@if (isset($pNodes) && empty($pNodes))
+						<div class="alert alert-danger pb-0">
+								<p class="text-danger fw-bolder text-center">
+										No Content Found for {{ $hTitle ?? 'Your Desired Title' }}
+								</p>
+						</div>
 				@endif
 		</div>
 </main>
