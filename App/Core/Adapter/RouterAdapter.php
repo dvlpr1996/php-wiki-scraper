@@ -53,7 +53,8 @@ class RouterAdapter
     private function displayError()
     {
         return $this->router->error(function () {
-            die('somethings wrong');
+            displayError('Something went wrong. Please try again.');
+            die;
         });
     }
 }
