@@ -1,8 +1,5 @@
-/node_modules
 /vendor
-.env
-.phpunit.result.cache
 /.vscode
-docs/
+/storage
 composer.lock
-storage/
+.env
