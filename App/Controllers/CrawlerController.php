@@ -10,6 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CrawlerController extends BaseController
 {
+    const TITLE =  '.firstHeading.mw-first-heading > .mw-page-title-main';
+    const BODY =  '.mw-parser-output table.infobox';
+
     public function __construct(
         private $validation = new ValidatorAdapter,
     ) {
@@ -19,11 +22,11 @@ class CrawlerController extends BaseController
     {
         $errors  = $this->validation->validate(CrawlerRequest::class);
 
-        $client = new CrawlerAdapter($this->get($request, 'input'));
+        $client = new CrawlerAdapter($request->request->get('input'));
 
-        $title = $client->getTitle('.firstHeading.mw-first-heading > .mw-page-title-main');
-        $pNodes = $client->getBody('.mw-parser-output table.infobox');
+        $hTitle = $client->getTitle(self::TITLE);
+        $pNodes = $client->getBody(self::BODY);
 
-        return $this->view('index', compact('errors', 'pNodes', 'title'));
+        return $this->view('index', compact('errors', 'pNodes', 'hTitle'));
     }
 }

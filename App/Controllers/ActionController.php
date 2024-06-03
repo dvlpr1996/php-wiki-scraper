@@ -8,6 +8,6 @@ class ActionController extends BaseController
 {
     public function index()
     {
-        return $this->view('index');
+        $this->view('index');
     }
 }
