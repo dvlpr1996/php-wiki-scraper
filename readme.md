@@ -2,7 +2,7 @@
 
 ## Description :
 
-Php wikipedia scraper with goutte
+Php Wikipedia Scraper With Goutte Just For English
 
 ## Language And Tools :
 <br>
