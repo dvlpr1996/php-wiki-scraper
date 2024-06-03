@@ -11,7 +11,7 @@ class VewDoesNotExistException extends Exception
         parent::__construct($message, $statusCode, $previous);
     }
 
-    public function __toString()
+    public function __toString():string
     {
         return "[ Error code : {$this->code} ]: {$this->message}";
     }
