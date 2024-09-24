@@ -7,33 +7,44 @@ use Exception;
 
 class DotEnvAdapter
 {
-    private $dotenv;
+    private static ?DotEnvAdapter $instance = null;
 
-    public function __construct(string $dotEnvPath)
+    private Dotenv $dotenv;
+
+    private function __construct(string $dotEnvPath)
     {
         $this->dotenv = Dotenv::createImmutable($dotEnvPath);
     }
 
-    private function loadDotEnv(string $loadType)
+    public static function getInstance(string $dotEnvPath): DotEnvAdapter
     {
-        $this->dotenv->$loadType();
+        if (self::$instance === null) {
+            self::$instance = new DotEnvAdapter($dotEnvPath);
+        }
+        return self::$instance;
     }
 
-    public function requiredElement()
+    public function loadDotEnv(string $loadType = 'load'): void
     {
+        if (method_exists($this->dotenv, $loadType)) {
+            $this->dotenv->$loadType();
+        } else {
+            throw new Exception("Invalid load type: {$loadType}");
+        }
+    }
+
+    public function requiredElement(array $requiredElements): void
+    {
+        if(empty($requiredElements)) {
+            throw new Exception("Required elements can not be empty");
+        }
+
         $this->loadDotEnv("safeLoad");
 
         try {
-            $this->dotenv->required('SITE_TITLE')->notEmpty();
-            $this->dotenv->required('APP_NAME')->notEmpty();
-            $this->dotenv->required('BASE_PATH')->notEmpty();
-            $this->dotenv->required('BASE_URL')->notEmpty();
-            $this->dotenv->required('ROUTER_DEBUG')->notEmpty();
-            $this->dotenv->required('DISPLAY_ERRORS')->notEmpty();
-            $this->dotenv->required('DISPLAY_STARTUP_ERRORS')->notEmpty();
-            $this->dotenv->required('ERROR_REPORTING')->notEmpty();
+            $this->dotenv->required($requiredElements)->notEmpty();
         } catch (Exception $e) {
-           die($e->getMessage());
+            die('Environment Error: ' . $e->getMessage());
         }
     }
 }
