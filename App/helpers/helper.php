@@ -22,17 +22,17 @@ if (!function_exists('checkFileExists')) {
     }
 }
 
-// todo :: singleton
 if (!function_exists('view')) {
     function view(string $path, array $data = [])
     {
         try {
-            (new BladeViewAdapter)->display($path, $data);
+            BladeViewAdapter::getInstance()->display($path, $data);
         } catch (Exception $e) {
             displayError($e->getMessage());
         }
     }
 }
+
 
 if (!function_exists('route')) {
     function route(string $routeName, array $parameter = []): string
@@ -41,7 +41,6 @@ if (!function_exists('route')) {
     }
 }
 
-// todo :: singleton
 if (!function_exists('getRoute')) {
     function getRoute(string $routeName): string
     {
