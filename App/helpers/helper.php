@@ -8,7 +8,7 @@ use app\Core\Adapter\BladeViewAdapter;
 if (!function_exists('config')) {
     function config(string $key): array|string
     {
-        return (new Config)->get($key);
+        return Config::getInstance()->get($key);
     }
 }
 
@@ -22,6 +22,7 @@ if (!function_exists('checkFileExists')) {
     }
 }
 
+// todo :: singleton
 if (!function_exists('view')) {
     function view(string $path, array $data = [])
     {
@@ -40,6 +41,7 @@ if (!function_exists('route')) {
     }
 }
 
+// todo :: singleton
 if (!function_exists('getRoute')) {
     function getRoute(string $routeName): string
     {
