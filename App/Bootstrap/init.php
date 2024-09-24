@@ -12,4 +12,4 @@ require_once realpath(BASE_APP_PATH . 'vendor/autoload.php');
 require_once BASE_APP_PATH . 'App/helpers/constants.php';
 require_once BASE_APP_PATH . 'Config/error.php';
 
-$router = new RouterAdapter;
+$router = RouterAdapter::getInstance();

@@ -45,12 +45,20 @@ if (!function_exists('getRoute')) {
     function getRoute(string $routeName): string
     {
         global $router;
+        $route = '';
         $allRoute = $router->getAllRoutes();
+
         foreach ($allRoute as $key => $value) {
             if ($value['name'] === $routeName) {
                 $route = $value['route'];
+                break;
             }
         }
+
+        if ($route === '') {
+            throw new Exception("Route with name '{$routeName}' not found.");
+        }
+
         return $route;
     }
 }

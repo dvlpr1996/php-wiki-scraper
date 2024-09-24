@@ -6,23 +6,33 @@ use Buki\Router\Router;
 
 class RouterAdapter
 {
-    private $router;
+    private static ?RouterAdapter $instance = null;
+
+    private Router $router;
     private array $config;
 
-    public function __construct()
+    private function __construct()
     {
         $this->config = config('route');
         $this->router = new Router($this->config);
     }
 
-    public function get(string $route, array $action, string $routeName)
+    public static function getInstance(): RouterAdapter
     {
-        return $this->router->GET($route, $action, ['name' => $routeName]);
+        if (self::$instance === null) {
+            self::$instance = new RouterAdapter();
+        }
+        return self::$instance;
     }
 
-    public function post(string $route, array $action, string $routeName)
+    public function get(string $route, array $action, string $routeName): void
     {
-        return $this->router->POST($route, $action, ['name' => $routeName]);
+        $this->router->GET($route, $action, ['name' => $routeName]);
+    }
+
+    public function post(string $route, array $action, string $routeName): void
+    {
+        $this->router->POST($route, $action, ['name' => $routeName]);
     }
 
     public function routerConfig(): array
@@ -30,30 +40,30 @@ class RouterAdapter
         return $this->config;
     }
 
-    public function getAllRoutes()
+    public function getAllRoutes(): array
     {
         return $this->router->getRoutes();
     }
 
-    public function runRouter()
+    public function runRouter(): void
     {
         $this->dispatch404();
         $this->displayError();
-        return $this->router->run();
+        $this->router->run();
     }
 
-    private function dispatch404()
+    private function dispatch404(): void
     {
-        return $this->router->notFound(function () {
+        $this->router->notFound(function () {
             header("HTTP/1.0 404 Not Found");
-            die('404');
+            die('404 - Page Not Found');
         });
     }
 
-    private function displayError()
+    private function displayError(): void
     {
-        return $this->router->error(function () {
-            displayError('Something went wrong. Please try again.');
+        $this->router->error(function ($error) {
+            displayError('An error occurred: ' . $error->getMessage());
             die;
         });
     }
