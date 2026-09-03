@@ -3,6 +3,9 @@
 namespace app\Core\Adapter;
 
 use Buki\Router\Router;
+use Exception;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class RouterAdapter
 {
@@ -62,9 +65,8 @@ class RouterAdapter
 
     private function displayError(): void
     {
-        $this->router->error(function ($error) {
-            displayError('An error occurred: ' . $error->getMessage());
-            die;
+        $this->router->error(function (Request $request, Response $response, Exception $exception) {
+            return view('index', ['validation_errors' => $exception->getMessage()]);
         });
     }
 }

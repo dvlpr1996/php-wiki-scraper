@@ -2,6 +2,7 @@
 
 namespace app\Core\Adapter;
 
+use Rakit\Validation\Validation;
 use Rakit\Validation\Validator;
 
 class ValidatorAdapter
@@ -16,19 +17,19 @@ class ValidatorAdapter
         $this->validator = new Validator;
     }
 
-    public function validate($validateClassName)
+    public function validate(string $validateClassName)
     {
         $this->validateRulesSetter($validateClassName);
         $this->validation = $this->validator->validate($_POST, $this->rules);
         return $this->validationErrors($this->validation);
     }
 
-    private function validateRulesSetter($validateClassName)
+    private function validateRulesSetter(string $validateClassName)
     {
         $this->rules = (new $validateClassName)->validateRules();
     }
 
-    private function validationErrors($validation)
+    private function validationErrors(Validation $validation)
     {
         if ($validation->fails()) {
             $this->errors = $this->validation->errors();

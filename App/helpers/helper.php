@@ -37,7 +37,7 @@ if (!function_exists('view')) {
 if (!function_exists('route')) {
     function route(string $routeName, array $parameter = []): string
     {
-        return BASE_URL . getRoute($routeName);
+        return getRoute($routeName);
     }
 }
 
