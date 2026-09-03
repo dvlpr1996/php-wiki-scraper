@@ -1,27 +1,39 @@
 <?php
 
+declare(strict_types=1);
+
 use app\Core\Adapter\DotEnvAdapter;
 use app\Core\Adapter\RouterAdapter;
 
-define('BASE_APP_PATH', __DIR__ . '/../../');
+define('BASE_APP_PATH', dirname(__DIR__, 2) . '/');
+
+$devMode = false;
+
+ini_set('display_errors', $devMode ? '1' : '0');
+ini_set('display_startup_errors', $devMode ? '1' : '0');
+ini_set('log_errors', '0');
+error_reporting($devMode ? E_ALL : 0);
+set_error_handler(function () use ($devMode) {
+    return $devMode ? false : true;
+});
 
 require_once realpath(BASE_APP_PATH . 'vendor/autoload.php');
 
 $dotEnvRequiredElement = [
-    'SITE_TITLE',
-    'APP_NAME',
-    'BASE_PATH',
     'BASE_URL',
     'ROUTER_DEBUG',
-    'DISPLAY_ERRORS',
-    'DISPLAY_STARTUP_ERRORS',
-    'ERROR_REPORTING'
 ];
 
 $dotenv = DotEnvAdapter::getInstance(BASE_APP_PATH);
 $dotenv->requiredElement($dotEnvRequiredElement);
 
-require_once BASE_APP_PATH . 'App/helpers/constants.php';
-require_once BASE_APP_PATH . 'Config/error.php';
+$constantsPath = BASE_APP_PATH . 'app/Helpers/constants.php';
+
+if (!file_exists($constantsPath) || !is_file($constantsPath)) {
+    http_response_code(500);
+    die('Critical Error: Initial constants file does not exist or is not a valid file.');
+}
+
+require_once $constantsPath;
 
 $router = RouterAdapter::getInstance();
