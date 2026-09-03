@@ -6,12 +6,19 @@
 				<div class="row my-3">
 						<h1 class="display-4 fst-italic text-center">
 								<a href="{{ route('index') }}" class="text-decoration-none text-dark">
-										Php wikipedia scraper (English Only)
+										Php wikipedia scraper <span class="display-6">(English Only)</span>
 								</a>
 						</h1>
 				</div>
 
 				<div class="row justify-content-center">
+
+						@if (isset($validation_errors) && !empty($validation_errors))
+								<div class="col-11 col-lg-8 alert alert-danger" role="alert">
+										{{ $validation_errors }}
+								</div>
+						@endif
+
 						<div class="col-11 col-lg-8">
 								<form action="{{ route('crawler') }}" method="POST">
 										<div class="input-group mb-3">
@@ -28,11 +35,16 @@
 						<div class="col-11 col-lg-8">
 								@if (isset($errors) && !empty($errors))
 										<div class="alert alert-danger">
-												<ul class="m-0 pl-2">
-														@foreach ($errors as $error)
-																<li class="text-danger">{{ $error }}</li>
-														@endforeach
-												</ul>
+												@if (is_array($errors))
+														<ul class="m-0 pl-2">
+																@foreach ($errors as $error)
+																		<li class="text-danger">{{ $error }}</li>
+																@endforeach
+														</ul>
+												@endif
+												@if (is_string($errors))
+														{{ $errors }}
+												@endif
 										</div>
 								@endif
 						</div>
