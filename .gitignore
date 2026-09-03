@@ -1,5 +1,8 @@
+.env
 /vendor
 /.vscode
 /storage
 composer.lock
-.env
+.phpunit.result.cache
+.phpunit.cache
+.phpunit.result.cache
